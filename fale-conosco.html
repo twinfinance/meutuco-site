@@ -223,42 +223,16 @@
 <main class="wrap">
   <div class="page-head">
     <h1>Fale conosco</h1>
-    <p class="lead" style="margin:0">O atendimento é pelo WhatsApp oficial. Preencha abaixo e a conversa já abre com a sua mensagem.</p>
+    <p class="lead" style="margin:0">O atendimento pelo WhatsApp oficial abre junto com o Meu Tuco. Entre na lista e a gente avisa primeiro.</p>
   </div>
 
   <div class="contact">
-    <form class="form-card" id="fale" novalidate>
-      <div class="chips" role="group" aria-label="Assunto">
-          <button type="button" aria-pressed="false" data-topic="Acompanhar minha proposta">Acompanhar minha proposta</button>
-          <button type="button" aria-pressed="false" data-topic="Desistir do contrato">Desistir do contrato</button>
-          <button type="button" aria-pressed="false" data-topic="Antecipar ou quitar">Antecipar ou quitar</button>
-          <button type="button" aria-pressed="false" data-topic="Saí da empresa">Saí da empresa</button>
-          <button type="button" aria-pressed="false" data-topic="Segunda via do contrato">Segunda via do contrato</button>
-          <button type="button" aria-pressed="false" data-topic="Meus dados (LGPD)">Meus dados (LGPD)</button>
-          <button type="button" aria-pressed="false" data-topic="Outro assunto">Outro assunto</button>
-      </div>
-      <div class="field"><label for="fc-nome">Seu nome</label><input id="fc-nome" name="nome" autocomplete="name" placeholder="Como você se chama"></div>
-      <div class="field"><label for="fc-assunto">Assunto</label>
-        <select id="fc-assunto" name="assunto">
-            <option value="">Escolha um assunto</option>
-            <option value="Acompanhar minha proposta">Acompanhar minha proposta</option>
-            <option value="Desistir do contrato">Desistir do contrato</option>
-            <option value="Antecipar ou quitar">Antecipar ou quitar</option>
-            <option value="Saí da empresa">Saí da empresa</option>
-            <option value="Segunda via do contrato">Segunda via do contrato</option>
-            <option value="Meus dados (LGPD)">Meus dados (LGPD)</option>
-            <option value="Outro assunto">Outro assunto</option>
-        </select></div>
-      <div class="field"><label for="fc-msg">Mensagem</label><textarea id="fc-msg" name="mensagem" placeholder="Conte o que aconteceu"></textarea></div>
-      <button class="btn btn-brand" type="submit">Enviar pelo WhatsApp</button>
-      <p class="wl-msg" id="fc-msg-status" role="status" hidden></p>
-      <p class="form-note">Não envie senha, número do cartão nem foto de documento por aqui.</p>
-    </form>
+    <div class="form-card"><p style="margin-top:0">Enquanto o atendimento não abre, deixe seu WhatsApp na lista de espera. Só mandamos o que for sobre o seu crédito.</p><a class="btn btn-brand" href="index.html#lista">Entrar na lista</a></div>
 
     <aside class="side">
-      <div class="side-card"><small>WhatsApp oficial</small><strong>(11) 95503-9431</strong><p>Conta comercial com selo.</p><a class="btn btn-brand btn-sm" href="https://wa.me/5511955039431">Abrir conversa</a></div>
+      <div class="side-card"><small>WhatsApp oficial</small><strong>(11) 95503-9431</strong><p>Abre junto com o Meu Tuco.</p></div>
       <div class="side-card"><small>SAC e ouvidoria</small><p style="margin-top:0">Os canais da instituição financeira parceira, responsável pelas operações de crédito, ficam aqui no lançamento.</p></div>
-      <div class="warn"><strong>Recebeu mensagem suspeita?</strong><p>Não pague nada e não passe senha. O Meu Tuco nunca pede dinheiro pra liberar crédito.</p><a href="https://wa.me/5511955039431?text=Recebi%20uma%20mensagem%20suspeita%20em%20nome%20da%20%5Bmarca%5D.">Avisar a gente pelo WhatsApp oficial</a></div>
+      <div class="warn"><strong>Recebeu mensagem suspeita?</strong><p>Não pague nada e não passe senha. O Meu Tuco nunca pede dinheiro pra liberar crédito.</p></div>
     </aside>
   </div>
 </main>
@@ -269,29 +243,5 @@
   <p><a href="index.html">Início</a> · <a href="privacidade.html">Privacidade</a> · <a href="termos.html">Termos</a> · © 2026 Meu Tuco</p>
 </div>
 
-<script>
-  /* Formulário que termina no WhatsApp: monta o texto e abre a conversa no número oficial. */
-  (function () {
-    var f = document.getElementById('fale'), sel = document.getElementById('fc-assunto'), st = document.getElementById('fc-msg-status');
-    var base = {'Acompanhar minha proposta': 'Quero acompanhar minha proposta.', 'Desistir do contrato': 'Quero desistir do meu contrato.', 'Antecipar ou quitar': 'Quero antecipar ou quitar parcelas.', 'Saí da empresa': 'Saí da empresa onde trabalhava. O que acontece com meu contrato?', 'Segunda via do contrato': 'Quero a segunda via do meu contrato.', 'Meus dados (LGPD)': 'Quero tratar dos meus dados pessoais (LGPD).', 'Outro assunto': ''};
-    f.querySelectorAll('.chips button').forEach(function (b) {
-      b.addEventListener('click', function () {
-        f.querySelectorAll('.chips button').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
-        b.setAttribute('aria-pressed', 'true'); sel.value = b.dataset.topic;
-        var m = document.getElementById('fc-msg'); if (!m.value && base[b.dataset.topic]) m.value = base[b.dataset.topic];
-      });
-    });
-    f.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var nome = document.getElementById('fc-nome').value.trim(), assunto = sel.value, msg = document.getElementById('fc-msg').value.trim();
-      if (!assunto) { st.textContent = 'Escolha um assunto.'; st.className = 'wl-msg err'; st.hidden = false; return; }
-      var txt = 'Olá!' + (nome ? ' Sou ' + nome + '.' : '') + ' Assunto: ' + assunto + '.' + (msg ? ' ' + msg : '');
-      var url = 'https://wa.me/5511955039431?text=' + encodeURIComponent(txt);
-      var w = window.open(url, '_blank');
-      st.innerHTML = w ? 'Abrimos o WhatsApp com a sua mensagem.' : 'Toque pra abrir: <a href="' + url + '">conversa no WhatsApp</a>.';
-      st.className = 'wl-msg ok'; st.hidden = false;
-    });
-  })();
-</script>
 </body>
 </html>
